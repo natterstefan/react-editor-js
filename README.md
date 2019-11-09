@@ -1,6 +1,6 @@
 # react-editor-js
 
-[![npm version](https://badge.fury.io/js/%40natterstefan%2Freact-editor-js.svg)](https://badge.fury.io/js/40natterstefan%2Freact-editor-js)
+[![npm version](https://badge.fury.io/js/%40natterstefan%2Freact-editor-js.svg)](https://badge.fury.io/js/%40natterstefan%2Freact-editor-js)
 [![Build Status](https://travis-ci.com/natterstefan/react-editor-js.svg?branch=master)](https://travis-ci.com/natterstefan/react-editor-js)
 [![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -119,7 +119,7 @@ const App = () => {
 ```
 
 `EditorJs` already comes with a basic config for [@editorjs/paragraph](https://www.npmjs.com/package/@editorjs/paragraph)
-and [[@editorjs/header](https://www.npmjs.com/package/@editorjs/header)]. Take a
+and [@editorjs/header](https://www.npmjs.com/package/@editorjs/header). Take a
 look on their [Github](https://github.com/editor-js) page to find more available
 plugins (or take a look at [the storybook example](src/__stories__/config.ts)).
 
