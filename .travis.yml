@@ -1,20 +1,37 @@
+# inspired by
+# - https://docs.cypress.io/guides/guides/continuous-integration.html#Travis
+# - https://docs.cypress.io/guides/guides/continuous-integration.html#Caching
 language: node_js
 
 node_js:
   - 'node'
 
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
+addons:
+  apt:
+    packages:
+      # Ubuntu 16+ does not install this dependency by default, so we need to
+      # install it ourselves
+      - libgconf-2-4
+
 install:
-  - npm ci
+  - yarn --silent
 
 script:
-  - npm test --silent
-  - npm run build
+  - yarn test --silent
+  - yarn build
 
 notifications:
   email:
     on_failure: change
 
 cache:
+  yarn: true
   directories:
     - ~/.npm # cache npm's cache
+    - ~/npm # cache latest npm
+    # we also need to cache folder with Cypress binary
     - ~/.cache
