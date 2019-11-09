@@ -1,0 +1,22 @@
+# OS, IDE, ...
+.DS_Store
+.vscode
+
+# Logs and Testing
+cypress/screenshots
+cypress/videos
+
+# Development
+.awcache
+node_modules
+tmp
+*.log
+
+# build
+.awcache
+build
+dist
+es
+esm
+lib
+*.tgz

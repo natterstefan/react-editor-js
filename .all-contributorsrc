@@ -1,0 +1,26 @@
+{
+  "projectName": "react-editor-js",
+  "projectOwner": "natterstefan",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "eslint",
+  "contributors": [
+    {
+      "login": "natterstefan",
+      "name": "Stefan Natter",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1043668?v=4",
+      "profile": "http://twitter.com/natterstefan",
+      "contributions": [
+        "code",
+        "doc",
+        "example"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
