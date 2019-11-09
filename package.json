@@ -1,6 +1,6 @@
 {
-  "name": "react-editorjs",
-  "version": "0.0.1",
+  "name": "@natterstefan/react-editor-js",
+  "version": "0.1.0",
   "description": "Unofficial react component for editorjs (https://editorjs.io/)",
   "repository": {
     "type": "git",
@@ -12,6 +12,9 @@
     "url": "https://github.com/natterstefan/react-editor-js/issues"
   },
   "homepage": "https://github.com/natterstefan/react-editor-js#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/index.js",
   "module": "esm/index.js",
   "types": "lib/index.d.ts",
@@ -35,12 +38,11 @@
     "prebuild": "rimraf dist && rimraf es && rimraf esm && rimraf lib",
     "prepublishOnly": "npm run prerelease",
     "prerelease": "npm run test",
-    "prestorybook2": "npm run build",
     "postbuild": "npm run size",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version",
     "size": "size-limit",
     "storybook": "start-storybook -p 6006 --ci",
-    "test": "npm run test-test && npm run test-cypress",
+    "test": "npm run test-jest && npm run test-cypress",
     "test-jest": "jest",
     "test-cypress": "start-server-and-test storybook http-get://localhost:6006 cypress",
     "watch-test": "jest --watch"
@@ -163,7 +165,7 @@
     }
   },
   "standard-version": {
-    "changelogHeader": "# react-editorjs\n\nAll notable changes to this project will be documented here. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).\n\n",
+    "changelogHeader": "# react-editor-js\n\nAll notable changes to this project will be documented here. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).\n\n",
     "types": [
       {
         "type": "feat",
@@ -199,12 +201,16 @@
       }
     ],
     "keywords": [
+      "react",
+      "editor",
+      "editor.js",
       "editorjs",
+      "@editorjs",
       "react-editor-js",
       "react-editorjs",
-      "react",
-      "wysiwyg",
-      "editor"
+      "editorjs-component",
+      "editor-js-component",
+      "wysiwyg"
     ]
   }
 }

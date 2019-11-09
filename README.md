@@ -1,6 +1,6 @@
-# react-editorjs
+# react-editor-js
 
-[![npm version](https://badge.fury.io/js/react-editorjs.svg)](https://badge.fury.io/js/react-editorjs)
+[![npm version](https://badge.fury.io/js/%40natterstefan%2Freact-editor-js.svg)](https://badge.fury.io/js/40natterstefan%2Freact-editor-js)
 [![Build Status](https://travis-ci.com/natterstefan/react-editor-js.svg?branch=master)](https://travis-ci.com/natterstefan/react-editor-js)
 [![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -10,10 +10,10 @@ Unofficial react component for editorjs ([https://editorjs.io/][1]).
 ## Getting started
 
 ```sh
-npm i react-editorjs --save
+npm i @natterstefan/react-editor-js --save
 
 # or
-yarn add react-editorjs
+yarn add @natterstefan/react-editor-js
 ```
 
 ## PeerDependencies
@@ -22,23 +22,23 @@ You have to install the required peerDependencies (eg. `React >= 16.8`), which
 are listed by the command:
 
 ```sh
-npm info "react-editorjs@latest" peerDependencies
+npm info "@natterstefan/react-editor-js@latest" peerDependencies
 ```
 
 If using npm 5+, use this shortcut:
 
 ```sh
-npx install-peerdeps --dev react-editorjs
+npx install-peerdeps --dev @natterstefan/react-editor-js
 
 # or
-yarn add react-editorjs -D --peer
+yarn add @natterstefan/react-editor-js -D --peer
 ```
 
 ## Usage
 
 ```jsx
 // index.js
-import EditorJs from 'react-editorjs'
+import EditorJs from '@natterstefan/react-editor-js'
 
 const App = () => {
   return <EditorJs data={data} />
@@ -58,7 +58,7 @@ for more details.
 
 ```jsx
 // index.js
-import EditorJs from 'react-editorjs'
+import EditorJs from '@natterstefan/react-editor-js'
 
 const App = () => {
   const editor = null
@@ -110,7 +110,7 @@ If you want to add [more tools](https://editorjs.io/getting-started#tools-instal
 
 ```jsx
 // index.js
-import EditorJs from 'react-editorjs'
+import EditorJs from '@natterstefan/react-editor-js'
 import Header from '@editorjs/header'
 
 const App = () => {

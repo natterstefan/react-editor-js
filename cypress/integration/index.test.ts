@@ -19,7 +19,7 @@ const STORY_URL = 'http://localhost:6006/?path=/story/reacteditorjs--default'
 const STORY_IFRAME_URL =
   'http://localhost:6006/iframe.html?id=reacteditorjs--default'
 
-describe('react-editorjs', () => {
+describe('react-editor-js', () => {
   it('renders properly the given data input', () => {
     cy.visit(STORY_IFRAME_URL)
 
