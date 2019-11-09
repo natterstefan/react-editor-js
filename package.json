@@ -24,6 +24,18 @@
     "esm",
     "lib"
   ],
+  "keywords": [
+    "react",
+    "editor",
+    "editor.js",
+    "editorjs",
+    "@editorjs",
+    "react-editor-js",
+    "react-editorjs",
+    "editorjs-component",
+    "editor-js-component",
+    "wysiwyg"
+  ],
   "scripts": {
     "build": "npm run build-cjs && npm run build-es && npm run build-esm && npm run build-umd",
     "build-cjs": "tsc --outDir lib --module commonjs --target es5 -d --declarationMap",
@@ -199,18 +211,6 @@
         "type": "test",
         "hidden": true
       }
-    ],
-    "keywords": [
-      "react",
-      "editor",
-      "editor.js",
-      "editorjs",
-      "@editorjs",
-      "react-editor-js",
-      "react-editorjs",
-      "editorjs-component",
-      "editor-js-component",
-      "wysiwyg"
     ]
   }
 }
