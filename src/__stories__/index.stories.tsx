@@ -26,20 +26,48 @@ storiesOf('ReactEditorJs', module)
   .add('default', () => {
     let instance: EditorJS = null
 
+    const onSave = async () => {
+      // https://editorjs.io/saving-data
+      try {
+        const outputData = await instance.save()
+        action('EditorJs onSave')(outputData)
+      } catch (e) {
+        action('EditorJs onSave failed')(e)
+      }
+    }
+
     const onChange = () => {
       action('EditorJs onChange')(instance)
     }
 
     return (
-      <EditorJs
-        tools={TOOLS}
-        data={data}
-        onChange={onChange}
-        editorInstance={editorInstance => {
-          instance = editorInstance
-          action('EditorJs editorInstance')(editorInstance)
-        }}
-      />
+      <div>
+        <button
+          onClick={onSave}
+          type="button"
+          style={{
+            cursor: 'pointer',
+            outline: 'none',
+            background: 'lightgray',
+            border: 0,
+            display: 'flex',
+            margin: '0 auto',
+            padding: '5px 10px',
+            borderRadius: 5,
+          }}
+        >
+          SAVE
+        </button>
+        <EditorJs
+          tools={TOOLS}
+          data={data}
+          onChange={onChange}
+          editorInstance={editorInstance => {
+            instance = editorInstance
+            action('EditorJs editorInstance')(editorInstance)
+          }}
+        />
+      </div>
     )
   })
   .add('with custom tool', () => {

@@ -212,5 +212,8 @@
         "hidden": true
       }
     ]
+  },
+  "dependencies": {
+    "himalaya": "^1.1.0"
   }
 }
