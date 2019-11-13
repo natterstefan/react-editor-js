@@ -1,6 +1,6 @@
 {
   "name": "@natterstefan/react-editor-js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Unofficial react component for editorjs (https://editorjs.io/)",
   "repository": {
     "type": "git",
