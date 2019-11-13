@@ -7,20 +7,10 @@ import EditorJS from '@editorjs/editorjs'
 import data from '../../cypress/fixtures/data'
 
 import { TOOLS } from './config'
+import { CustomJs } from './custom-plugin-js'
+import { CustomReact, Button } from './custom-plugin-react'
 
 import EditorJs from '..'
-
-class CustomTool {
-  render() {
-    return document.createElement('textarea')
-  }
-
-  save(textarea: HTMLTextAreaElement) {
-    return {
-      text: textarea.value,
-    }
-  }
-}
 
 storiesOf('ReactEditorJs', module)
   .add('default', () => {
@@ -42,7 +32,9 @@ storiesOf('ReactEditorJs', module)
       />
     )
   })
-  .add('with custom tool', () => {
+  .add('with custom plugins', () => {
+    let instance: EditorJS = null
+
     const customData = {
       time: new Date().getTime(),
       blocks: [
@@ -54,20 +46,68 @@ storiesOf('ReactEditorJs', module)
           },
         },
         {
-          type: 'custom',
+          type: 'header',
           data: {
-            value: 'Editor.js',
+            text: 'CustomReact Plugin',
+            level: 2,
           },
+        },
+        {
+          type: 'customReact',
+          data: {
+            component: Button,
+          },
+        },
+        {
+          type: 'header',
+          data: {
+            text: 'CustomJS Plugin',
+            level: 2,
+          },
+        },
+        {
+          type: 'customJs',
+          data: {},
         },
       ],
       version: '2.15.0',
     }
 
+    const onSave = async () => {
+      try {
+        const outputData = await instance.save()
+        action('EditorJs onSave')(outputData)
+      } catch (e) {
+        action('EditorJs onSave failed')(e)
+      }
+    }
+
     return (
-      <EditorJs
-        tools={{ custom: CustomTool }}
-        data={customData}
-        editorInstance={action('EditorJs editorInstance')}
-      />
+      <div>
+        <button
+          onClick={onSave}
+          type="button"
+          style={{
+            cursor: 'pointer',
+            outline: 'none',
+            background: 'lightgray',
+            border: 0,
+            display: 'flex',
+            margin: '0 auto',
+            padding: '5px 10px',
+            borderRadius: 5,
+          }}
+        >
+          SAVE
+        </button>
+        <EditorJs
+          tools={{ customReact: CustomReact, customJs: CustomJs }}
+          data={customData}
+          editorInstance={editorInstance => {
+            instance = editorInstance
+            action('EditorJs editorInstance')(editorInstance)
+          }}
+        />
+      </div>
     )
   })

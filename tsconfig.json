@@ -19,5 +19,5 @@
     "typeRoots": ["node_modules/@types", "src/@types"]
   },
   "include": ["src/**/*", "index.d.ts"],
-  "exclude": ["src/**/__tests__", "src/**/__stories__/*"]
+  "exclude": ["node_modules", "src/**/__tests__", "src/**/__stories__/*"]
 }

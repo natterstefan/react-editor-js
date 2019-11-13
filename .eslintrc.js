@@ -7,6 +7,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-hooks'],
   rules: {
+    'class-methods-use-this': 0,
     'sort-keys': 0,
     '@typescript-eslint/interface-name-prefix': [
       2,
