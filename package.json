@@ -48,7 +48,7 @@
     "cypress": "cypress run",
     "lint": "tsc --noEmit && eslint '**/*.{ts,tsx}' --quiet",
     "prebuild": "rimraf dist && rimraf es && rimraf esm && rimraf lib",
-    "prepublishOnly": "npm run prerelease",
+    "prepublishOnly": "npm run build && npm run prerelease",
     "prerelease": "npm run test",
     "postbuild": "npm run size",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version",
