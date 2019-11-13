@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useEffect } from 'react'
+import React, { FunctionComponent, memo, ReactElement, useEffect } from 'react'
 import EditorJS from '@editorjs/editorjs'
 import Paragraph from '@editorjs/paragraph'
 import Header from '@editorjs/header'
@@ -62,4 +62,4 @@ const EditorJs: FunctionComponent<EditorJsProps> = (props): ReactElement => {
   return (children as ReactElement) || <div id={holder} />
 }
 
-export default EditorJs
+export default memo(EditorJs)
