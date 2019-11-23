@@ -6,6 +6,7 @@ import { action } from '@storybook/addon-actions'
 import EditorJS from '@editorjs/editorjs'
 
 import data from '../../cypress/fixtures/data'
+import Readme from '../../README.md'
 
 import { TOOLS } from './config'
 import { CustomJs } from './custom-plugin-js'
@@ -37,6 +38,11 @@ const SaveButton = ({
 )
 
 storiesOf('ReactEditorJs', module)
+  .add('readme', () => <div />, {
+    readme: {
+      content: Readme,
+    },
+  })
   .add('default', () => {
     let instance: EditorJS = null
 

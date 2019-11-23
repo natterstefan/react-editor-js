@@ -128,6 +128,7 @@
     "source-map-loader": "^0.2.4",
     "standard-version": "^7.0.0",
     "start-server-and-test": "^1.10.6",
+    "storybook-readme": "^5.0.8",
     "terser-webpack-plugin": "^2.2.1",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.2",
