@@ -20,3 +20,4 @@ es
 esm
 lib
 *.tgz
+storybook-static
