@@ -123,6 +123,12 @@ and [@editorjs/header](https://www.npmjs.com/package/@editorjs/header). Take a
 look on their [Github](https://github.com/editor-js) page to find more available
 plugins (or take a look at [the storybook example](src/__stories__/config.ts)).
 
+## Additional Props
+
+| Name                      |   Type    | Default | Description                                                                                                              |
+| :------------------------ | :-------: | :-----: | :----------------------------------------------------------------------------------------------------------------------- |
+| reinitializeOnPropsChange | `boolean` | `false` | editor-js is initialised again on [componentDidUpdate](https://reactjs.org/docs/react-component.html#componentdidupdate) |
+
 ## Licence
 
 [MIT](LICENCE)

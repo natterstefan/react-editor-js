@@ -7,6 +7,8 @@ export interface IEditorJsProps extends EditorJS.EditorConfig {
   children?: ReactElement
   // Id of Element that should contain the Editor
   holder?: string
+  // reinitialize editor.js when component did update
+  reinitializeOnPropsChange?: boolean
   // editorjs instance
   editorInstance?: (instance: EditorJS) => void
 }
@@ -19,6 +21,8 @@ const EditorJs: FunctionComponent<EditorJsProps> = (props): ReactElement => {
   const {
     holder: customHolder,
     editorInstance,
+    /* optimise performance */
+    reinitializeOnPropsChange,
     /* eslint-disable-next-line */
     children,
     tools,
@@ -50,14 +54,21 @@ const EditorJs: FunctionComponent<EditorJsProps> = (props): ReactElement => {
 
     return (): void => {
       // destroys the editor
-      if (instance) {
+      if (instance && reinitializeOnPropsChange) {
         instance.isReady.then(() => {
           instance.destroy()
           instance = undefined
         })
       }
     }
-  }, [holder, editorInstance, otherProps, props, tools])
+  }, [
+    holder,
+    editorInstance,
+    otherProps,
+    props,
+    tools,
+    reinitializeOnPropsChange,
+  ])
 
   return (children as ReactElement) || <div id={holder} />
 }

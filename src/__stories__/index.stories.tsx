@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
@@ -11,6 +12,29 @@ import { CustomJs } from './custom-plugin-js'
 import { CustomReact, Button } from './custom-plugin-react'
 
 import EditorJs from '..'
+
+const SaveButton = ({
+  onClick,
+}: {
+  onClick: (event: React.MouseEvent<HTMLElement>) => void
+}) => (
+  <button
+    onClick={onClick}
+    type="button"
+    style={{
+      cursor: 'pointer',
+      outline: 'none',
+      background: 'lightgray',
+      border: 0,
+      display: 'flex',
+      margin: '0 auto',
+      padding: '5px 10px',
+      borderRadius: 5,
+    }}
+  >
+    SAVE
+  </button>
+)
 
 storiesOf('ReactEditorJs', module)
   .add('default', () => {
@@ -32,8 +56,100 @@ storiesOf('ReactEditorJs', module)
       />
     )
   })
-  .add('with custom plugins', () => {
-    let instance: EditorJS = null
+  .add('controlled EditorJs', () => {
+    const App = () => {
+      const [appData, setAppData] = React.useState(data)
+      let editorInstance: EditorJS = null
+
+      const onSave = async () => {
+        if (editorInstance) {
+          try {
+            const outputData = await editorInstance.save()
+            action('EditorJs onSave')(outputData)
+            setAppData(appData)
+          } catch (error) {
+            action('EditorJs was not able to save data')(error)
+          }
+        }
+      }
+
+      const onChange = () => {
+        action('EditorJs onChange')
+        onSave()
+      }
+
+      return (
+        <div>
+          <SaveButton onClick={onSave} />
+          <EditorJs
+            tools={TOOLS}
+            data={appData}
+            editorInstance={instance => {
+              editorInstance = instance
+              action('EditorJs editorInstance')(instance)
+            }}
+            onChange={onChange}
+          />
+        </div>
+      )
+    }
+
+    return <App />
+  })
+  .add('controlled App -> Editor -> EditorJs', () => {
+    // the ´<App />` renders an `<Editor />` component, which renders `EditorJs`
+    const App = () => {
+      const [appData, setAppData] = React.useState(data)
+
+      const onChange = (newAppData: any) => {
+        setAppData(newAppData)
+      }
+
+      return <Editor appData={appData} onChange={onChange} />
+    }
+
+    const Editor = ({
+      appData,
+      onChange,
+    }: {
+      appData: any
+      onChange: (data: any) => void
+    }) => {
+      let editorInstance: EditorJS = null
+
+      const onChangeHandler = async () => {
+        if (editorInstance) {
+          try {
+            const outputData = await editorInstance.save()
+            action('EditorJs onSave')(outputData)
+            onChange(outputData)
+          } catch (error) {
+            action('EditorJs was not able to save data')(error)
+          }
+        }
+      }
+
+      return (
+        <div>
+          <SaveButton onClick={onChangeHandler} />
+          <EditorJs
+            tools={TOOLS}
+            data={appData}
+            editorInstance={instance => {
+              editorInstance = instance
+              action('EditorJs editorInstance')(instance)
+            }}
+            // reinitializeOnPropsChange
+            onChange={onChangeHandler}
+          />
+        </div>
+      )
+    }
+
+    return <App />
+  })
+  .add('with custom tool (react)', () => {
+    let editorInstance: EditorJS = null
 
     const customData = {
       time: new Date().getTime(),
@@ -74,37 +190,24 @@ storiesOf('ReactEditorJs', module)
     }
 
     const onSave = async () => {
-      try {
-        const outputData = await instance.save()
-        action('EditorJs onSave')(outputData)
-      } catch (e) {
-        action('EditorJs onSave failed')(e)
+      if (editorInstance) {
+        try {
+          const outputData = await editorInstance.save()
+          action('EditorJs onSave')(outputData)
+        } catch (e) {
+          action('EditorJs onSave failed')(e)
+        }
       }
     }
 
     return (
       <div>
-        <button
-          onClick={onSave}
-          type="button"
-          style={{
-            cursor: 'pointer',
-            outline: 'none',
-            background: 'lightgray',
-            border: 0,
-            display: 'flex',
-            margin: '0 auto',
-            padding: '5px 10px',
-            borderRadius: 5,
-          }}
-        >
-          SAVE
-        </button>
+        <SaveButton onClick={onSave} />
         <EditorJs
           tools={{ customReact: CustomReact, customJs: CustomJs }}
           data={customData}
-          editorInstance={editorInstance => {
-            instance = editorInstance
+          editorInstance={instance => {
+            editorInstance = instance
             action('EditorJs editorInstance')(editorInstance)
           }}
         />
