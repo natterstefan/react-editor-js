@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.com/natterstefan/react-editor-js.svg?branch=master)](https://travis-ci.com/natterstefan/react-editor-js)
 [![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/98a2eaf6-7b36-4136-adbd-38d7d68085b3/deploy-status)](https://app.netlify.com/sites/react-editor-js/deploys)
 
 Unofficial react component for editorjs ([https://editorjs.io/][1]).
 
