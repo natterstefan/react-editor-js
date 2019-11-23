@@ -1,5 +1,4 @@
 declare module '@editorjs/*'
-declare module '@editorjs/paragraph'
 
 // required for storybook
 // inspired by https://github.com/storybookjs/storybook/issues/2883#issuecomment-409839786

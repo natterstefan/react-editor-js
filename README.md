@@ -52,7 +52,8 @@ based on the example output presented on [editorjs.io][1].
 ### Configuration
 
 `EditorJs` passes all given props straight to the `editorjs` instance. It is
-basically just a wrapper component in React. Take a look at the [Configuration page in the editorjs documentation](https://editorjs.io/configuration)
+basically just a wrapper component in React. Take a look at the
+[configuration page in the editor.js documentation](https://editorjs.io/configuration)
 for more details.
 
 #### Advanced example with callbacks, custom element and instance access
@@ -106,8 +107,8 @@ const App = () => {
 
 ## Plugins / Tools
 
-If you want to add [more tools](https://editorjs.io/getting-started#tools-installation) simply pass a `tools` property to the
-`EditorJs` component:
+If you want to add [more tools](https://editorjs.io/getting-started#tools-installation)
+simply pass a `tools` property to the `EditorJs` component:
 
 ```jsx
 // index.js
