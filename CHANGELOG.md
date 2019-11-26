@@ -3,6 +3,13 @@
 All notable changes to this project will be documented here. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+### [0.2.3](https://github.com/natterstefan/react-editor-js/compare/v0.2.2...v0.2.3) (2019-11-26)
+
+
+### Fixes
+
+* properly handle reinitializeOnPropsChange and render cycles, rename type Props ([88ce8d6](https://github.com/natterstefan/react-editor-js/commit/88ce8d676445bfdbaa2749618ea446fa2aaee38e))
+
 ### [0.2.2](https://github.com/natterstefan/react-editor-js/compare/v0.2.1...v0.2.2) (2019-11-23)
 
 
