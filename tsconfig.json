@@ -7,7 +7,7 @@
     "declaration": false /* Generates corresponding '.d.ts' file. (set to true in npm script) */,
     "declarationMap": false /* Generates a sourcemap for each corresponding '.d.ts' file. (set to true in npm script) */,
     "sourceMap": true /* Generates corresponding '.map' file. */,
-    "removeComments": true /* Do not emit comments to output. */,
+    "removeComments": false /* Do emit comments to output. */,
     "jsx": "react" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
     /* Strict Type-Checking Options */
     "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,

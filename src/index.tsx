@@ -1,74 +1,84 @@
-import React, { FunctionComponent, memo, ReactElement, useEffect } from 'react'
+import React, {
+  FunctionComponent,
+  memo,
+  MutableRefObject,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react'
 import EditorJS from '@editorjs/editorjs'
 import Paragraph from '@editorjs/paragraph'
 import Header from '@editorjs/header'
 
-export interface IEditorJsProps extends EditorJS.EditorConfig {
+export interface IEditorJsProps {
   children?: ReactElement
-  // Id of Element that should contain the Editor
+  /**
+   * Id of Element that should contain the Editor
+   */
   holder?: string
-  // reinitialize editor.js when component did update
+  /**
+   * reinitialize editor.js when component did update
+   */
   reinitializeOnPropsChange?: boolean
-  // editorjs instance
+  /**
+   * returns the editorjs instance
+   */
   editorInstance?: (instance: EditorJS) => void
 }
 
-export type EditorJsProps = Readonly<IEditorJsProps>
+export type Props = Readonly<EditorJS.EditorConfig> & Readonly<IEditorJsProps>
 
 const DEFAULT_ID = 'editorjs'
 
-const EditorJs: FunctionComponent<EditorJsProps> = (props): ReactElement => {
+const EditorJs: FunctionComponent<Props> = (props): ReactElement => {
   const {
     holder: customHolder,
     editorInstance,
-    /* optimise performance */
     reinitializeOnPropsChange,
-    /* eslint-disable-next-line */
     children,
     tools,
     ...otherProps
   } = props
 
+  const instance: MutableRefObject<EditorJS> = useRef(null)
   const holder = customHolder || DEFAULT_ID
 
-  useEffect(() => {
-    let instance: EditorJS = null
-
-    // initialise the editor with a paragraph and header block already
-    instance = new EditorJS({
-      tools: {
-        paragraph: {
-          class: Paragraph,
-          inlineToolbar: true,
+  const initEditor = useCallback(() => {
+    if (instance && !instance.current) {
+      instance.current = new EditorJS({
+        tools: {
+          paragraph: {
+            class: Paragraph,
+            inlineToolbar: true,
+          },
+          header: Header,
+          ...tools,
         },
-        header: Header,
-        ...tools,
-      },
-      holder,
-      ...otherProps,
-    })
-
-    if (editorInstance) {
-      editorInstance(instance)
+        holder,
+        ...otherProps,
+      })
     }
 
+    if (editorInstance) {
+      editorInstance(instance.current)
+    }
+  }, [editorInstance, holder, otherProps, tools])
+
+  useEffect(() => {
+    initEditor()
+
     return (): void => {
-      // destroys the editor
-      if (instance && reinitializeOnPropsChange) {
-        instance.isReady.then(() => {
-          instance.destroy()
-          instance = undefined
+      if (instance.current && reinitializeOnPropsChange) {
+        instance.current.isReady.then(() => {
+          instance.current.destroy()
+          instance.current = undefined
+
+          initEditor()
         })
       }
     }
-  }, [
-    holder,
-    editorInstance,
-    otherProps,
-    props,
-    tools,
-    reinitializeOnPropsChange,
-  ])
+  }, [initEditor, reinitializeOnPropsChange])
 
   return (children as ReactElement) || <div id={holder} />
 }
