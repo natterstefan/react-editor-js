@@ -11,10 +11,15 @@ import EditorJS from '@editorjs/editorjs'
 import Paragraph from '@editorjs/paragraph'
 import Header from '@editorjs/header'
 
-export interface IEditorJsProps {
+export interface IEditorJsProps extends EditorJS.EditorConfig {
   children?: ReactElement
   /**
-   * Id of Element that should contain the Editor
+   * Element id where Editor will be append
+   * @deprecated property will be removed in next major release, use holder instead
+   */
+  holderId?: string
+  /**
+   * Element id where Editor will be append
    */
   holder?: string
   /**
@@ -27,13 +32,11 @@ export interface IEditorJsProps {
   editorInstance?: (instance: EditorJS) => void
 }
 
-export type Props = Readonly<EditorJS.EditorConfig> & Readonly<IEditorJsProps>
-
 const DEFAULT_ID = 'editorjs'
 
-const EditorJs: FunctionComponent<Props> = (props): ReactElement => {
+const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
   const {
-    holder: customHolder,
+    holder: customHolderId,
     editorInstance,
     reinitializeOnPropsChange,
     children,
@@ -42,7 +45,7 @@ const EditorJs: FunctionComponent<Props> = (props): ReactElement => {
   } = props
 
   const instance: MutableRefObject<EditorJS> = useRef(null)
-  const holder = customHolder || DEFAULT_ID
+  const holderId = customHolderId || DEFAULT_ID
 
   const initEditor = useCallback(() => {
     if (instance && !instance.current) {
@@ -55,7 +58,7 @@ const EditorJs: FunctionComponent<Props> = (props): ReactElement => {
           header: Header,
           ...tools,
         },
-        holder,
+        holder: holderId,
         ...otherProps,
       })
     }
@@ -63,7 +66,7 @@ const EditorJs: FunctionComponent<Props> = (props): ReactElement => {
     if (editorInstance) {
       editorInstance(instance.current)
     }
-  }, [editorInstance, holder, otherProps, tools])
+  }, [editorInstance, holderId, otherProps, tools])
 
   useEffect(() => {
     initEditor()
@@ -80,7 +83,7 @@ const EditorJs: FunctionComponent<Props> = (props): ReactElement => {
     }
   }, [initEditor, reinitializeOnPropsChange])
 
-  return (children as ReactElement) || <div id={holder} />
+  return children || <div id={holderId} />
 }
 
 export default memo(EditorJs)

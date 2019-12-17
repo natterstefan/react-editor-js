@@ -88,8 +88,10 @@ const App = () => {
   return (
     <div>
       <button onClick={onSave}>Save</button>
+      {/* docs: https://editorjs.io/configuration */}
       <EditorJs
         data={data}
+        // will be `editorjs` by default
         holder="custom-editor-container"
         onReady={onReady}
         onChange={onChange}
@@ -97,7 +99,6 @@ const App = () => {
           editor = editorInstance
         }}
       >
-        {/* https://editorjs.io/configuration */}
         <div id="custom-editor-container" />
       </EditorJs>
     </div>
