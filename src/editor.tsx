@@ -36,6 +36,7 @@ const DEFAULT_ID = 'editorjs'
 
 const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
   const {
+    holderId: deprecatedId,
     holder: customHolderId,
     editorInstance,
     reinitializeOnPropsChange,
@@ -45,7 +46,7 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
   } = props
 
   const instance: MutableRefObject<EditorJS> = useRef(null)
-  const holderId = customHolderId || DEFAULT_ID
+  const holderId = deprecatedId || customHolderId || DEFAULT_ID
 
   const initEditor = useCallback(() => {
     if (instance && !instance.current) {

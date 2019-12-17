@@ -154,6 +154,28 @@ storiesOf('ReactEditorJs', module)
 
     return <App />
   })
+  .add('with custom holder', () => {
+    let instance: EditorJS = null
+
+    const onChange = () => {
+      action('EditorJs onChange')(instance)
+    }
+
+    return (
+      <EditorJs
+        tools={TOOLS}
+        data={data}
+        onChange={onChange}
+        holder="custom-editor-container"
+        editorInstance={editorInstance => {
+          instance = editorInstance
+          action('EditorJs editorInstance')(editorInstance)
+        }}
+      >
+        <div id="custom-editor-container" />
+      </EditorJs>
+    )
+  })
   .add('with custom tool (react)', () => {
     let editorInstance: EditorJS = null
 
