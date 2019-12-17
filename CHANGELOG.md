@@ -3,6 +3,13 @@
 All notable changes to this project will be documented here. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+### [0.3.1](https://github.com/natterstefan/react-editor-js/compare/v0.3.0...v0.3.1) (2019-12-17)
+
+
+### Fixes
+
+* still support deprecated holderId property ([10774a4](https://github.com/natterstefan/react-editor-js/commit/10774a41b002acf9398036ceee387299c2b0304d))
+
 ## [0.3.0](https://github.com/natterstefan/react-editor-js/compare/v0.2.3...v0.3.0) (2019-12-17)
 
 
