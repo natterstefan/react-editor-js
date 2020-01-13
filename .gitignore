@@ -1,6 +1,5 @@
 # OS, IDE, ...
 .DS_Store
-.vscode
 
 # Logs and Testing
 cypress/screenshots
