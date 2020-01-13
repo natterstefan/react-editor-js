@@ -49,7 +49,7 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
   const holderId = deprecatedId || customHolderId || DEFAULT_ID
 
   const initEditor = useCallback(() => {
-    if (instance && !instance.current) {
+    if (!instance.current) {
       instance.current = new EditorJS({
         tools: {
           paragraph: {
@@ -69,20 +69,36 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
     }
   }, [editorInstance, holderId, otherProps, tools])
 
+  const destroyEditor = useCallback(async () => {
+    if (instance.current) {
+      await instance.current.isReady
+      instance.current.destroy()
+      instance.current = undefined
+      return true
+    }
+
+    return false
+  }, [instance])
+
+  /**
+   * initEditor on mount and destroy it on unmount
+   */
   useEffect(() => {
     initEditor()
-
     return (): void => {
-      if (instance.current && reinitializeOnPropsChange) {
-        instance.current.isReady.then(() => {
-          instance.current.destroy()
-          instance.current = undefined
-
-          initEditor()
-        })
-      }
+      destroyEditor()
     }
-  }, [initEditor, reinitializeOnPropsChange])
+  }, []) // eslint-disable-line
+
+  /**
+   * when props change and reinitializeOnPropsChange is true, the component will
+   * first destroy and then init EditorJS again.
+   */
+  useEffect(() => {
+    if (reinitializeOnPropsChange) {
+      destroyEditor().then(initEditor)
+    }
+  }, [destroyEditor, initEditor, instance, reinitializeOnPropsChange])
 
   return children || <div id={holderId} />
 }
