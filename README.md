@@ -6,7 +6,13 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/98a2eaf6-7b36-4136-adbd-38d7d68085b3/deploy-status)](https://app.netlify.com/sites/react-editor-js/deploys)
 
-Unofficial react component for editorjs ([https://editorjs.io/][1]).
+Unofficial react component for Editor.js ([https://editorjs.io/][1]).
+
+## Demo
+
+You can see [react-editor-js](https://github.com/natterstefan/react-editor-js)
+in action on both [codesandbox](https://codesandbox.io/s/react-editor-js-example-m9e49)
+and [netlify](https://react-editor-js.netlify.com/).
 
 ## Getting started
 
