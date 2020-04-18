@@ -14,7 +14,7 @@ addons:
   apt:
     packages:
       # Ubuntu 16+ does not install this dependency by default, so we need to
-      # install it ourselves
+      # install it ourselves. It is required for tests with cypress.
       - libgconf-2-4
 
 install:
