@@ -23,6 +23,7 @@ install:
 script:
   - yarn test --silent
   - yarn build
+  - yarn size
 
 notifications:
   email:
