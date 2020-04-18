@@ -53,7 +53,10 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
   const instance: MutableRefObject<EditorJS | null> = useRef(null)
   const holderId = deprecatedId || customHolderId || DEFAULT_ID
 
-  const initEditor = useCallback(() => {
+  /**
+   * initialise editorjs with default settings
+   */
+  const initEditor = useCallback(async () => {
     if (!instance.current) {
       instance.current = new EditorJS({
         tools: {
@@ -69,7 +72,9 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
       })
     }
 
+    // callback returns current editorjs instance once it is ready
     if (editorInstance) {
+      await instance.current.isReady
       editorInstance(instance.current)
     }
   }, [editorInstance, holderId, otherProps, tools])
