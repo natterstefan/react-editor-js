@@ -15,7 +15,8 @@ export interface IEditorJsProps extends EditorJS.EditorConfig {
   children?: ReactElement
   /**
    * Element id where Editor will be append
-   * @deprecated property will be removed in next major release, use holder instead
+   * @deprecated property will be removed in next major release,
+   * use holder instead
    */
   holderId?: string
   /**
@@ -34,6 +35,10 @@ export interface IEditorJsProps extends EditorJS.EditorConfig {
 
 const DEFAULT_ID = 'editorjs'
 
+/**
+ * EditorJs wraps editor.js in a React component and providing an API to be able
+ * to interact with the editor.js instance.
+ */
 const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
   const {
     holderId: deprecatedId,
@@ -45,7 +50,7 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
     ...otherProps
   } = props
 
-  const instance: MutableRefObject<EditorJS> = useRef(null)
+  const instance: MutableRefObject<EditorJS | null> = useRef(null)
   const holderId = deprecatedId || customHolderId || DEFAULT_ID
 
   const initEditor = useCallback(() => {
@@ -69,15 +74,18 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
     }
   }, [editorInstance, holderId, otherProps, tools])
 
+  /**
+   * destroy current editorjs instance
+   */
   const destroyEditor = useCallback(async () => {
-    if (instance.current) {
-      await instance.current.isReady
-      instance.current.destroy()
-      instance.current = undefined
+    if (!instance.current) {
       return true
     }
 
-    return false
+    await instance.current.isReady
+    instance.current.destroy()
+    instance.current = null
+    return true
   }, [instance])
 
   /**
@@ -95,9 +103,16 @@ const EditorJs: FunctionComponent<IEditorJsProps> = (props): ReactElement => {
    * first destroy and then init EditorJS again.
    */
   useEffect(() => {
-    if (reinitializeOnPropsChange) {
-      destroyEditor().then(initEditor)
+    const doEffect = async () => {
+      if (!reinitializeOnPropsChange) {
+        return
+      }
+
+      await destroyEditor()
+      initEditor()
     }
+
+    doEffect()
   }, [destroyEditor, initEditor, instance, reinitializeOnPropsChange])
 
   return children || <div id={holderId} />
