@@ -45,10 +45,10 @@ storiesOf('ReactEditorJs', module)
     },
   })
   .add('default', () => {
-    let instance: EditorJS = null
+    let editorInstance: EditorJS = null
 
     const onChange = () => {
-      action('EditorJs onChange')(instance)
+      action('EditorJs onChange')(editorInstance)
     }
 
     return (
@@ -56,9 +56,11 @@ storiesOf('ReactEditorJs', module)
         tools={TOOLS}
         data={data}
         onChange={onChange}
-        editorInstance={editorInstance => {
-          instance = editorInstance
+        editorInstance={instance => {
+          editorInstance = instance
           action('EditorJs editorInstance')(editorInstance)
+          // added to window for cypress testing
+          ;(window as any).app = editorInstance
         }}
       />
     )

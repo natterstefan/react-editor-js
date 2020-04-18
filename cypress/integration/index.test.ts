@@ -34,19 +34,11 @@ describe('react-editor-js', () => {
   })
 
   it('returns editorjs instance properly', () => {
-    cy.visit(STORY_URL)
+    cy.visit(STORY_IFRAME_URL)
 
-    // test it editorjs was successfully rendered
-    cy.get('.simplebar-wrapper').should('be.visible')
-
-    // click on the expand icon in the actions tab
-    cy.get('#storybook-panel-root ol li span').first().click()
-    cy.get('#storybook-panel-root ol li ol li span').first().click()
-
-    cy.get('.simplebar-wrapper').should(element => {
-      expect(element).to.contain('EditorJs editorInstance')
-      expect(element).to.contain('isReady')
-    })
+    cy.window({ timeout: 5000 })
+      .its('app.configuration.holder' as any)
+      .should('equal', 'editorjs')
   })
 
   it('passes callbacks like onChange properly to editorjs instance', () => {

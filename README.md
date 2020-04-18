@@ -102,6 +102,7 @@ const App = () => {
         onReady={onReady}
         onChange={onChange}
         editorInstance={editorInstance => {
+          // invoked once the editorInstance is ready
           editor = editorInstance
         }}
       >
