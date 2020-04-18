@@ -46,6 +46,7 @@
     "contributors-add": "all-contributors add",
     "contributors-generate": "all-contributors generate",
     "cypress": "cypress open",
+    "cypress:run": "cypress run",
     "lint": "tsc --noEmit && eslint '**/*.{ts,tsx}' --quiet",
     "prebuild": "rimraf dist && rimraf es && rimraf esm && rimraf lib",
     "prepublishOnly": "npm run build && npm run prerelease",
@@ -56,7 +57,7 @@
     "start": "yarn start-storybook -p 6006 --ci",
     "test": "npm run test-jest && npm run test-cypress",
     "test-jest": "jest",
-    "test-cypress": "start-server-and-test start http-get://localhost:6006 cypress run",
+    "test-cypress": "start-server-and-test start http-get://localhost:6006 cypress:run",
     "watch-test": "jest --watch"
   },
   "peerDependencies": {
