@@ -1,8 +1,9 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useRef, useState, MutableRefObject } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import { boolean, withKnobs } from '@storybook/addon-knobs'
 import EditorJS from '@editorjs/editorjs'
 
 import data from '../../cypress/fixtures/data'
@@ -37,6 +38,7 @@ const SaveButton = ({
 )
 
 storiesOf('ReactEditorJs', module)
+  .addDecorator(withKnobs)
   .add('readme', () => <div />, {
     readme: {
       content: Readme,
@@ -62,16 +64,21 @@ storiesOf('ReactEditorJs', module)
     )
   })
   .add('controlled EditorJs', () => {
+    const reinitializeOnPropsChange = boolean(
+      'reinitializeOnPropsChange',
+      false,
+    )
+
     const App = () => {
-      const [appData, setAppData] = React.useState(data)
-      let editorInstance: EditorJS = null
+      const [appData, setAppData] = useState(data)
+      const editorInstance: MutableRefObject<EditorJS | null> = useRef(null)
 
       const onSave = async () => {
-        if (editorInstance) {
+        if (editorInstance.current) {
           try {
-            const outputData = await editorInstance.save()
+            const outputData = await editorInstance.current.save()
             action('EditorJs onSave')(outputData)
-            setAppData(appData)
+            setAppData(outputData)
           } catch (error) {
             action('EditorJs was not able to save data')(error)
           }
@@ -90,10 +97,11 @@ storiesOf('ReactEditorJs', module)
             tools={TOOLS}
             data={appData}
             editorInstance={instance => {
-              editorInstance = instance
+              editorInstance.current = instance
               action('EditorJs editorInstance')(instance)
             }}
             onChange={onChange}
+            reinitializeOnPropsChange={reinitializeOnPropsChange}
           />
         </div>
       )
@@ -104,7 +112,7 @@ storiesOf('ReactEditorJs', module)
   .add('controlled App -> Editor -> EditorJs', () => {
     // the ´<App />` renders an `<Editor />` component, which renders `EditorJs`
     const App = () => {
-      const [appData, setAppData] = React.useState(data)
+      const [appData, setAppData] = useState(data)
 
       const onChange = (newAppData: any) => {
         setAppData(newAppData)
@@ -120,12 +128,12 @@ storiesOf('ReactEditorJs', module)
       appData: any
       onChange: (data: any) => void
     }) => {
-      let editorInstance: EditorJS = null
+      const editorInstance: MutableRefObject<EditorJS | null> = useRef(null)
 
       const onChangeHandler = async () => {
-        if (editorInstance) {
+        if (editorInstance.current) {
           try {
-            const outputData = await editorInstance.save()
+            const outputData = await editorInstance.current.save()
             action('EditorJs onSave')(outputData)
             onChange(outputData)
           } catch (error) {
@@ -141,10 +149,9 @@ storiesOf('ReactEditorJs', module)
             tools={TOOLS}
             data={appData}
             editorInstance={instance => {
-              editorInstance = instance
+              editorInstance.current = instance
               action('EditorJs editorInstance')(instance)
             }}
-            // reinitializeOnPropsChange
             onChange={onChangeHandler}
           />
         </div>
@@ -154,10 +161,10 @@ storiesOf('ReactEditorJs', module)
     return <App />
   })
   .add('with custom holder', () => {
-    let instance: EditorJS = null
+    const editorInstance: MutableRefObject<EditorJS | null> = useRef(null)
 
     const onChange = () => {
-      action('EditorJs onChange')(instance)
+      action('EditorJs onChange')(editorInstance.current)
     }
 
     return (
@@ -166,8 +173,8 @@ storiesOf('ReactEditorJs', module)
         data={data}
         onChange={onChange}
         holder="custom-editor-container"
-        editorInstance={editorInstance => {
-          instance = editorInstance
+        editorInstance={instance => {
+          editorInstance.current = instance
           action('EditorJs editorInstance')(editorInstance)
         }}
       >
@@ -176,10 +183,9 @@ storiesOf('ReactEditorJs', module)
     )
   })
   .add('with custom tool (react)', () => {
-    let editorInstance: EditorJS = null
+    const editorInstance: MutableRefObject<EditorJS | null> = useRef(null)
 
     const customData = {
-      time: new Date().getTime(),
       blocks: [
         {
           type: 'header',
@@ -213,13 +219,12 @@ storiesOf('ReactEditorJs', module)
           data: {},
         },
       ],
-      version: '2.15.0',
     }
 
     const onSave = async () => {
-      if (editorInstance) {
+      if (editorInstance.current) {
         try {
-          const outputData = await editorInstance.save()
+          const outputData = await editorInstance.current.save()
           action('EditorJs onSave')(outputData)
         } catch (e) {
           action('EditorJs onSave failed')(e)
@@ -234,7 +239,7 @@ storiesOf('ReactEditorJs', module)
           tools={{ customReact: CustomReact, customJs: CustomJs }}
           data={customData}
           editorInstance={instance => {
-            editorInstance = instance
+            editorInstance.current = instance
             action('EditorJs editorInstance')(editorInstance)
           }}
         />

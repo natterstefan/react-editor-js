@@ -88,6 +88,7 @@
     "@editorjs/warning": "1.1.1",
     "@size-limit/preset-small-lib": "4.4.5",
     "@storybook/addon-actions": "5.3.17",
+    "@storybook/addon-knobs": "5.3.18",
     "@storybook/core": "5.3.17",
     "@storybook/core-events": "5.3.17",
     "@storybook/preset-typescript": "3.0.0",

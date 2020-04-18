@@ -15,5 +15,6 @@ module.exports = {
     },
     '@storybook/addon-actions',
     'storybook-readme',
+    '@storybook/addon-knobs/register',
   ],
 }
