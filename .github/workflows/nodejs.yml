@@ -27,10 +27,7 @@ jobs:
 
       - run: yarn --silent
 
-      - run: yarn test-jest --silent
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v1
+      - run: yarn test
 
       - run: yarn build
         env:
