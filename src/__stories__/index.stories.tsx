@@ -7,12 +7,11 @@ import EditorJS from '@editorjs/editorjs'
 
 import data from '../../cypress/fixtures/data'
 import Readme from '../../README.md'
+import EditorJs from '..'
 
 import { TOOLS } from './config'
 import { CustomJs } from './custom-plugin-js'
 import { CustomReact, Button } from './custom-plugin-react'
-
-import EditorJs from '..'
 
 const SaveButton = ({
   onClick,

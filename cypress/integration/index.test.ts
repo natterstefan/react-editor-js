@@ -40,12 +40,8 @@ describe('react-editor-js', () => {
     cy.get('.simplebar-wrapper').should('be.visible')
 
     // click on the expand icon in the actions tab
-    cy.get('#storybook-panel-root ol li span')
-      .first()
-      .click()
-    cy.get('#storybook-panel-root ol li ol li span')
-      .first()
-      .click()
+    cy.get('#storybook-panel-root ol li span').first().click()
+    cy.get('#storybook-panel-root ol li ol li span').first().click()
 
     cy.get('.simplebar-wrapper').should(element => {
       expect(element).to.contain('EditorJs editorInstance')
