@@ -51,9 +51,9 @@
     "prebuild": "rimraf dist && rimraf es && rimraf esm && rimraf lib",
     "prepublishOnly": "npm run build && npm run prerelease",
     "prerelease": "npm run test",
-    "postbuild": "npm run size",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version",
-    "size": "size-limit",
+    "size": "npm run size-build && size-limit",
+    "size-build": "npm run build",
     "start": "yarn start-storybook -p 6006 --ci",
     "test": "npm run test-jest && npm run test-cypress",
     "test-jest": "jest",
@@ -166,14 +166,17 @@
     },
     {
       "limit": "6 KB",
+      "webpack": false,
       "path": "lib/**/*.js"
     },
     {
       "limit": "6 KB",
+      "webpack": false,
       "path": "es/**/*.js"
     },
     {
       "limit": "6 KB",
+      "webpack": false,
       "path": "esm/**/*.js"
     }
   ],
