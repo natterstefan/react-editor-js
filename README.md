@@ -139,6 +139,10 @@ plugins (or take a look at [the storybook example](src/__stories__/config.ts)).
 | :------------------------ | :-------: | :-----: | :----------------------------------------------------------------------------------------------------------------------- |
 | reinitializeOnPropsChange | `boolean` | `false` | editor-js is initialised again on [componentDidUpdate](https://reactjs.org/docs/react-component.html#componentdidupdate) |
 
+## References
+
+- [Debug GitHub Action with tmate](https://github.com/marketplace/actions/debugging-with-tmate)
+
 ## Licence
 
 [MIT](LICENCE)
