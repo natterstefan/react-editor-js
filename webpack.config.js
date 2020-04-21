@@ -11,6 +11,7 @@ module.exports = {
     libraryTarget: 'umd',
     path: resolve(__dirname, './dist'),
   },
+  // https://github.com/TypeStrong/ts-loader#devtool--sourcemaps
   devtool: 'source-map',
   mode: 'production',
   resolve: {
@@ -19,15 +20,10 @@ module.exports = {
   module: {
     rules: [
       {
-        exclude: /node_modules/,
         test: /\.(t|j)sx?$/,
-        loader: 'awesome-typescript-loader',
-        options: {
-          silent: true,
-          useCache: true,
-        },
+        exclude: /node_modules/,
+        loader: 'ts-loader',
       },
-      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
     ],
   },
   optimization: {
