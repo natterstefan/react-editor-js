@@ -23,6 +23,7 @@ module.exports = {
         test: /\.(t|j)sx?$/,
         loader: 'awesome-typescript-loader',
         options: {
+          silent: true,
           useCache: true,
         },
       },
