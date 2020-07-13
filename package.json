@@ -128,7 +128,7 @@
     "react-dom": "16.13.1",
     "rimraf": "3.0.2",
     "size-limit": "4.4.5",
-    "standard-version": "7.1.0",
+    "standard-version": "8.0.1",
     "start-server-and-test": "1.11.0",
     "storybook-readme": "5.0.8",
     "terser-webpack-plugin": "2.3.5",
